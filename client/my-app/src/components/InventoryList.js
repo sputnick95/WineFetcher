@@ -23,7 +23,7 @@ function InventoryList(inventory){
                 <h1>Inventory</h1>
             </div>
             <div className="cards">
-                {ww !== undefined ? ww.map((item) => <InventoryItem/> )  : null }
+                {ww !== undefined ? ww.map((item) => <InventoryItem {...item} key={item.id}/> )  : null }
             </div>
         </>
     )

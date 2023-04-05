@@ -9,6 +9,7 @@ import Homepage from './components/Home';
 import InventoryList from './components/InventoryList';
 
 
+
 function App() {
   const [wine_inventory, setWineInventory] = useState([])
 
@@ -30,4 +31,6 @@ function App() {
   );
 }
 
+
 export default App;
+
