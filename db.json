@@ -1,8 +1,9 @@
 {
    "wines": 
-    [
-        {
-            "white_wines":[
+    
+      {
+        "white_wines":
+        [
          {
             "winery": "Domaine de La Romanée-Conti",
             "wine": "Montrachet Grand Cru 2010",
@@ -665,6 +666,9 @@
         "location": "France\n·\nMusigny Grand Cru",
         "image": "https://images.vivino.com/thumbs/YGMg3nBYROud3n23UfUy1A_pb_x300.png",
         "id": 30
-      }
-    ]
-}]}
+        }
+      ]
+    }
+  
+}
+

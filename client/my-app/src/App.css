@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.bg-image{
+  padding: 20em;
+  outline: 2px solid black;
+  background-repeat: no-repeat;
+  background-image: url("https://www.jacadatravel.com/wp-content/uploads/fly-images/335274/Langhe-Italy-1600x500-cc.jpg");
+  background-size: 60% 70%;
+  background-position: center;
+}
+
+.inventory-div{
+  outline: 2px solid black;
+}
+
+.cards {
+
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 5rem;
+  margin-top: 0.5rem;
+  margin-left: 5rem;
+}
+
+.mb-2 {
+  width: auto;
+  margin: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
