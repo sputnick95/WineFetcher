@@ -51,7 +51,6 @@
 }
 
 .cards {
-
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -68,3 +67,33 @@
 * {
   box-sizing: border-box;
 }
+
+.item-details-div {
+  padding: 5em;
+  outline: 2px solid black;
+  display: flex;
+  justify-content: flex-start;
+  background-color: #EAEDED;
+}
+
+.item-summary {
+  padding-right: 50px;
+} 
+
+.image-div{
+  padding-right: 1em;
+  
+}
+.form-inline {
+  padding-right: 1em;
+}
+
+.number-of-orders {
+  margin-right: .2 em;
+}
+
+.shopping-cart {
+  padding: 5em;
+  outline: 2px solid black;
+}
+

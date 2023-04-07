@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
-
+import CartIcon from "./CartIcon";
 
 
 export default class Header extends Component {
@@ -14,6 +14,8 @@ export default class Header extends Component {
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/inventory">Inventory</Nav.Link>
+                            <Nav.Link href="/item-details">Item Details</Nav.Link>
+                            
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
@@ -26,10 +28,13 @@ export default class Header extends Component {
                             </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
+                        <Nav.Link className="form-inline my-2 my-lg-0" href="/shopping-cart">
+                            <CartIcon /> Cart
+                        </Nav.Link>
                         </Navbar.Collapse>
                 </Navbar>
             </div>
-        )
+        )   
     }
 }
 

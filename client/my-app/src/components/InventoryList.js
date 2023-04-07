@@ -22,7 +22,6 @@ function InventoryList(inventory){
         setActivePage(pageNumber)
     };
 
-    console.log(productsOnPage)
 
 
     return(
