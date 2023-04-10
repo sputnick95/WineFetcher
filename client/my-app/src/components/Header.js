@@ -3,8 +3,22 @@ import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import CartIcon from "./CartIcon";
 
 
-export default class Header extends Component {
-    render(){
+function Header({userStatus, setUser}){
+
+
+        function handleLogOut(){
+            setUser({})
+          }
+
+        function handleLogoutSubmit(){
+            fetch('/logout', {
+                method: 'Delete',
+            }).then(() => handleLogOut());
+        }
+        if (userStatus.username !== undefined){
+            console.log(userStatus.username)
+        }
+
         return (
             <div>
                 <Navbar bg="transparent" expand="xl">
@@ -17,7 +31,8 @@ export default class Header extends Component {
                             <Nav.Link href="/item-details">Item Details</Nav.Link>
                             
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                            {/* <NavDropdown.Item href="/login">Login</NavDropdown.Item>  */}
+                            {userStatus.username !== undefined ? <NavDropdown.Item onClick={handleLogoutSubmit} >Logout</NavDropdown.Item> : <NavDropdown.Item href="/login">Login</NavDropdown.Item>}
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
                             </NavDropdown.Item>
@@ -27,6 +42,7 @@ export default class Header extends Component {
                                 Separated link
                             </NavDropdown.Item>
                             </NavDropdown>
+                            {userStatus.username !== undefined ? <Nav.Link>You are Logged In as: {userStatus.username}</Nav.Link> : null}
                         </Nav>
                         <Nav.Link className="form-inline my-2 my-lg-0" href="/shopping-cart">
                             <CartIcon /> Cart
@@ -36,5 +52,5 @@ export default class Header extends Component {
             </div>
         )   
     }
-}
 
+export default Header;

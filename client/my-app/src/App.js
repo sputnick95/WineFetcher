@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 //import components
 import Header from './components/Header';
@@ -9,41 +9,65 @@ import Homepage from './components/Home';
 import InventoryList from './components/InventoryList';
 import ItemDetails from './components/ItemDetails';
 import ShoppingCart from './components/ShoppingCart';
-
-
-
+import LoginPage from './components/Login';
+import SignUp from "./components/SignUp";
 
 function App() {
   const [wine_inventory, setWineInventory] = useState([])
-  const [item_details, setItemDetails] = useState({})
+  const [user, setUser] = useState({})
+  const navigate = useNavigate();
 
   useEffect(()=>{
-    fetch("http://localhost:3000/wines")
+    fetch("http://localhost:3000/white_wines")
     .then(resp => resp.json())
     .then(data => setWineInventory(data))
   }, [])
 
-  let ww_item_test;
-  if (wine_inventory.white_wines!== undefined){
-    console.log(wine_inventory.white_wines[0])
-    ww_item_test = wine_inventory.white_wines[0]
+
+
+  //login
+  function handleLoginSubmit(event){
+    event.preventDefault()
+    const data ={
+      username: event.target.username.value,
+      password: event.target.password.value
+    }
+
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(data => setUser(data))
+    .then(() => navigate('/inventory'))
+    .then(() => window.location.reload());
   }
 
-  console.log(ww_item_test)
+  useEffect(()=>{
+    fetch("/check_session").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
 
   //why do i get an infinite-loop after using useState???
 
   return (
     <div className="App">
-      <Header/>
+      <Header userStatus={user} setUser={setUser}/>
       <Routes>
         <Route
         element={<Homepage inventory={wine_inventory} />} exact path="/"/>
-        {wine_inventory !== undefined ? <Route element={<InventoryList inventory={wine_inventory}/>} path="/inventory"/> : null}
-        {ww_item_test !== undefined ? <Route element={<ItemDetails item_1_test={ww_item_test} />} path="/item-details" /> : null}
-        <Route
-        element={<ShoppingCart/>} path='/shopping-cart'
-        />
+        {wine_inventory !== undefined ? <Route element={<InventoryList user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
+        {wine_inventory !== undefined ? <Route element={<ItemDetails item_1_test={wine_inventory} />} path="/item-details" /> : null}
+        {wine_inventory !== undefined ? <Route element={<ShoppingCart test={wine_inventory} />} path='/shopping-cart'  /> : null}
+        <Route element={<LoginPage handleLoginSubmit={handleLoginSubmit} />} path="/login" />
+        <Route element={<SignUp />} path="/signup" />
       </Routes>
     </div>
   );

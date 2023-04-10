@@ -4,13 +4,15 @@ import { Pagination } from 'react-bootstrap';
 //Child Components
 import InventoryItem from './InventoryItem'
 
-function InventoryList(inventory){
+function InventoryList({user, inventory} ){
+    
     const [activePage, setActivePage] = useState(1);
-    const ww = inventory.inventory.white_wines
+    const ww = inventory
     const pageSize = 9;
     let totalPages;
     let productsOnPage;
     let startIndex;
+
 
     if (ww !== undefined) {
         totalPages = Math.ceil(Object.keys(ww).length / pageSize);
@@ -22,15 +24,13 @@ function InventoryList(inventory){
         setActivePage(pageNumber)
     };
 
-
-
-    return(
+        return(
         <>
             <div>
                 <h1>Inventory</h1>
             </div>
             <div className="cards">
-                {productsOnPage !== undefined ? productsOnPage.map((item) => <InventoryItem {...item} key={item.id}/> )  : null }
+                {productsOnPage !== undefined ? productsOnPage.map((item) => <InventoryItem handleClick_ID {...item} key={item.id}/> )  : null }
             </div>
             <Pagination className="justify-content-center" >
                 {Array.from({ length: totalPages}, (_, i) => (
