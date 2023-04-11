@@ -5,9 +5,9 @@ import {useNavigate} from "react-router-dom"
 function SignUp(){
     const navigate = useNavigate();
 
+    
     function handleSubmit(event){
         event.preventDefault()
-
         const data = {
             email: event.target.email.value,
             username: event.target.username.value,
@@ -23,6 +23,8 @@ function SignUp(){
         .then(data => console.log(data))
         .then(() => navigate('/login'))
     }
+
+
 
     return(
         <div className="background-form">
