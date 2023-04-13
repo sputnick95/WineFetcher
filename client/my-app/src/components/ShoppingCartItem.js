@@ -20,11 +20,11 @@ function ShoppingCartItem({image, wine, winery, id, setUserCart}){
 
     return(
         <>
-            <div className='shopping-cart-row'>
-                <div className='img-div'> 
+            <Row className='shopping-cart-row'>
+                <Col className='img-div'> 
                     <img className='item-cart-image'  src={image !== undefined ? image : null} alt="Item Image" />
-                </div>
-                <div className='item-cart-summary-div'>
+                </Col>
+                <Col className='item-cart-summary-div'>
                     <div className='item-title'>
                         {wine !== undefined ? <h5> <b> {wine} </b> </h5> : null}
                     </div>
@@ -33,8 +33,8 @@ function ShoppingCartItem({image, wine, winery, id, setUserCart}){
                         {winery !== undefined ? <p>Winery: {winery}</p> : null}
                         <Button onClick={handleClickDelete} className='remove-from-cart-button' >Remove from Cart</Button>
                     </div>
-                </div>  
-            </div>
+                </Col>  
+            </Row>
         </>
     )
 }
