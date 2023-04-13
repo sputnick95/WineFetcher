@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
+import { useParams } from 'react-router-dom';
 
-function ShoppingCart({test}){
-    
-    console.log(test)
+//import component
+
+import ShoppingCartItem from './ShoppingCartItem';
+
+function ShoppingCart({userCart, setUserCart}){
+
+    const { id } = useParams()
+
+    useEffect(() => {
+        fetch(`/cart_user_id/${id}`)
+        .then(resp => resp.json())
+        .then(data => setUserCart(data))
+    }, [])
+
+
+
 
     return(
         <>  
@@ -11,21 +25,11 @@ function ShoppingCart({test}){
             
             <div> 
                 <div className='shopping-cart'>
-                    <div className='shopping-cart-row'>
-                        <div className='img-div'> 
-                            <img className='item-cart-image' src={test[0].image} />
-                        </div>
-                        <div className='item-cart-summary-div'>
-                            <div className='item-title'>
-                                <h5> <b> {test[0].wine} </b> </h5>
-                            </div>
-                            <div className='item-info'>
-                                <span>Eligible fro FREE Shipping</span>
-                                <p>Winery: {test[0].winery}</p>
-                                <Button className='remove-from-cart-button' >Remove from Cart</Button>
-                            </div>
-                        </div>  
-                    </div>
+                    {userCart.map(item => {
+                        return (
+                            <ShoppingCartItem {...item} key={item.id} setUserCart={setUserCart} />
+                        )
+                    })}
                 </div>
             </div>
         </>

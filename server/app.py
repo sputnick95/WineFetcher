@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request, make_response, session as browser_session
 from extensions import *
-from models import db, User
+from models import db, User, Cart
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -45,7 +45,6 @@ def login():
         browser_session['user_id'] = user.id
         return jsonify(username), 201
     
-    
 @app.route('/check_session', methods=['GET'])
 def CheckSession():
 
@@ -66,7 +65,6 @@ def logging_out():
         browser_session['user_id'] = None
         return jsonify({'message': '204: No Content'}), 204
 
-
 @app.route('/users', methods=['GET'])
 def check_users():
     if request.method == 'GET':
@@ -76,10 +74,57 @@ def check_users():
 
         return make_response(jsonify(each_user_dicted), 200)
     
+@app.route('/cart_user_id/<int:id>', methods=['GET', 'DELETE'])
+def cart_by_userid(id):
+    user = User.query.filter_by(id=id).first()
+
+    if request.method == 'GET':
+        cart_items_dict = [item.to_dict() for item in user.carts]
+        return make_response(jsonify(cart_items_dict), 200)
+    
+
+@app.route('/new_cart_item', methods = ['POST'])
+def new_cart_item():
+    
+    if request.method == 'POST':
+        data = request.get_json()
+
+        new_item = Cart(
+            wine_name = data['wine_name'],
+            winery = data['winery'],
+            image = data['image'],
+            user_id = data['user_id']
+        )
+
+        db.session.add(new_item)
+        db.session.commit()
+        return make_response(jsonify(new_item.to_dict()), 201)
+
+
+@app.route('/cart_item/<int:id>', methods=['GET','DELETE'])
+def cart_item(id):
+    item = Cart.query.filter_by(id=id).first()
+
+    if item is None:
+       return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+    elif request.method == 'GET':
+        return make_response(jsonify(item.to_dict()), 200)
+    
+    elif request.method == 'DELETE':
+        db.session.delete(item)
+        db.session.commit()
+        return make_response(jsonify({'Deleted': True}), 202)
+
+# @app.route('/cart_to_orders', methods=['POST'])
+# def cart_to_order():
+#     pass
+
+
+    
 
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
-
-
 

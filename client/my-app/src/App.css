@@ -84,6 +84,15 @@
   padding-right: 1em;
   
 }
+
+.Inventory-button-quantity {
+  align-self: flex-start;
+}
+
+.add-to-cart-button {
+  margin-top: 2em;
+}
+
 .form-inline {
   padding-right: 1em;
 }
@@ -97,8 +106,6 @@
   outline: 2px solid black;
   display: flex;
 }
-
-
 
 .img-div, .item-cart-image {
   width: 50%;

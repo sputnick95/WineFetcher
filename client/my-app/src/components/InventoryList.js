@@ -4,7 +4,7 @@ import { Pagination } from 'react-bootstrap';
 //Child Components
 import InventoryItem from './InventoryItem'
 
-function InventoryList({user, inventory} ){
+function InventoryList({user, inventory, userCart} ){
     
     const [activePage, setActivePage] = useState(1);
     const ww = inventory
@@ -30,7 +30,7 @@ function InventoryList({user, inventory} ){
                 <h1>Inventory</h1>
             </div>
             <div className="cards">
-                {productsOnPage !== undefined ? productsOnPage.map((item) => <InventoryItem handleClick_ID {...item} key={item.id}/> )  : null }
+                {productsOnPage !== undefined ? productsOnPage.map((item) => <InventoryItem handleClick_ID {...item} key={item.id} user={user}/> )  : null }
             </div>
             <Pagination className="justify-content-center" >
                 {Array.from({ length: totalPages}, (_, i) => (

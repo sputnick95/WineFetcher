@@ -3,20 +3,15 @@ import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import CartIcon from "./CartIcon";
 
 
-function Header({userStatus, setUser}){
-
+function Header({userStatus, setUser, userCart}){
 
         function handleLogOut(){
             setUser({})
           }
-
         function handleLogoutSubmit(){
             fetch('/logout', {
                 method: 'Delete',
             }).then(() => handleLogOut());
-        }
-        if (userStatus.username !== undefined){
-            console.log(userStatus.username)
         }
 
         return (
@@ -28,10 +23,8 @@ function Header({userStatus, setUser}){
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/inventory">Inventory</Nav.Link>
-                            <Nav.Link href="/item-details">Item Details</Nav.Link>
-                            
+                            <Nav.Link href="/item-details">Item Details</Nav.Link> 
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            {/* <NavDropdown.Item href="/login">Login</NavDropdown.Item>  */}
                             {userStatus.username !== undefined ? <NavDropdown.Item onClick={handleLogoutSubmit} >Logout</NavDropdown.Item> : <NavDropdown.Item href="/login">Login</NavDropdown.Item>}
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
@@ -44,8 +37,8 @@ function Header({userStatus, setUser}){
                             </NavDropdown>
                             {userStatus.username !== undefined ? <Nav.Link>You are Logged In as: {userStatus.username}</Nav.Link> : null}
                         </Nav>
-                        <Nav.Link className="form-inline my-2 my-lg-0" href="/shopping-cart">
-                            <CartIcon /> Cart
+                        <Nav.Link className="form-inline my-2 my-lg-0" href={`/shopping-cart/${userStatus.id}`}>
+                            <CartIcon userStatus={userStatus} userCart={userCart} /> Cart
                         </Nav.Link>
                         </Navbar.Collapse>
                 </Navbar>

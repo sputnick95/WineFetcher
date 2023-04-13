@@ -12,7 +12,7 @@ import ShoppingCart from './components/ShoppingCart';
 import LoginPage from './components/Login';
 import SignUp from "./components/SignUp";
 
-function App() {
+function App({userCart, setUserCart}) {
   const [wine_inventory, setWineInventory] = useState([])
   const [user, setUser] = useState({})
   const navigate = useNavigate();
@@ -55,17 +55,15 @@ function App() {
   }, []);
 
 
-  //why do i get an infinite-loop after using useState???
-
   return (
     <div className="App">
-      <Header userStatus={user} setUser={setUser}/>
+      <Header userStatus={user} setUser={setUser} userCart={userCart} />
       <Routes>
         <Route
         element={<Homepage inventory={wine_inventory} />} exact path="/"/>
-        {wine_inventory !== undefined ? <Route element={<InventoryList user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
+        {wine_inventory !== undefined ? <Route element={<InventoryList userCart={userCart} user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
         {wine_inventory !== undefined ? <Route element={<ItemDetails item_1_test={wine_inventory} />} path="/item-details" /> : null}
-        {wine_inventory !== undefined ? <Route element={<ShoppingCart test={wine_inventory} />} path='/shopping-cart'  /> : null}
+        {wine_inventory !== undefined ? <Route element={<ShoppingCart userCart={userCart} setUserCart={setUserCart} />} path='/shopping-cart/:id'  /> : null}
         <Route element={<LoginPage handleLoginSubmit={handleLoginSubmit} />} path="/login" />
         <Route element={<SignUp />} path="/signup" />
       </Routes>

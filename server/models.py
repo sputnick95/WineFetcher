@@ -28,7 +28,7 @@ class Cart(db.Model):
     location = db.Column(db.String)
     average_rating = db.Column(db.Float)
     number_of_reviews = db.Column(db.String)
-    image = db.Column(db.LargeBinary)
+    image = db.Column(db.String)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

@@ -5,17 +5,30 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup';
+import { Image } from 'react-bootstrap';
 
-function InventoryItem({wine, image, id}){
+function InventoryItem({wine, image, id, winery, user}){
 
 
 
     function handleClick_ID(event) {
-        // fetch(`http://localhost:3000/white_wines/${id}`)
-        // .then(data => data.json())
-        // .then(resp => console.log(resp))
+        
+
+        
+        const new_item_to_cart = {
+            wine_name: wine,
+            winery: winery,
+            image: image,
+            user_id: user.id
+        }
+
+        fetch(`/new_cart_item`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(new_item_to_cart)
+        })
+            .then(resp => resp.json())
     }
-    
     
 
     return(
@@ -28,14 +41,14 @@ function InventoryItem({wine, image, id}){
                 text='Dark'
                 style={{ width: '18rem' }}
                 className="mb-2"
-                onClick={handleClick_ID}
+                
             >   
                 <Card.Img variant="top" src={image} style={{ maxWidth: '35%'}} className="mx-auto d-block"  />
                 <Card.Body>
                     <Card.Title>{wine}</Card.Title>
-                    <Row>
+                    <Row className='Inventory-button-quantity' >
                         <Col>
-                            <Button>Add to Cart</Button>
+                            <Button className='add-to-cart-button' onClick={handleClick_ID} >Add to Cart</Button>
                         </Col>
                         <Col>
                             <Form.Label>Quantity:</Form.Label>

@@ -1,9 +1,12 @@
 import React from "react";
 
-function CartIcon() {
+function CartIcon({userCart, userStatus, cart_num}) {
+
+  console.log(userCart.length)
+
   return (
     <>
-        <span className="number-of-orders">2</span>
+        <span className="number-of-orders">{userCart.length}</span>
         
         <svg    
         xmlns="http://www.w3.org/2000/svg"
