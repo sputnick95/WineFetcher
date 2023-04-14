@@ -8,7 +8,7 @@ function InventoryList({user, inventory, userCart} ){
     
     const [activePage, setActivePage] = useState(1);
     const ww = inventory
-    const pageSize = 9;
+    const pageSize = 12;
     let totalPages;
     let productsOnPage;
     let startIndex;

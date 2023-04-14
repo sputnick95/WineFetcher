@@ -1,4 +1,4 @@
-[
+{"white_wines": [
   {
     "winery": "Domaine de La Romanée-Conti",
     "wine": "Montrachet Grand Cru 2010",
@@ -9,8 +9,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/rORmihtxSrKG7SfuI0bD6w_pb_x300.png",
     "id": 1,
-    "price": 6000,
-    "comments": []
+    "price": 1000,
+    "comments": [],
+    "stock": 19
   },
   {
     "winery": "Domaine de La Romanée-Conti",
@@ -22,8 +23,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/rORmihtxSrKG7SfuI0bD6w_pb_x300.png",
     "id": 2,
-    "price": 4500,
-    "comments": []
+    "price": 3100,
+    "comments": [],
+    "stock": 17
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -35,8 +37,9 @@
     "location": "France\n·\nMeursault",
     "image": "https://images.vivino.com/thumbs/l5W5NRvZR_SzClIDSnG5Ag_pb_x300.png",
     "id": 3,
-    "price": 1900,
-    "comments": []
+    "price": 1600,
+    "comments": [],
+    "stock": 1
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -48,8 +51,9 @@
     "location": "France\n·\nCorton-Charlemagne Grand Cru",
     "image": "https://images.vivino.com/thumbs/ZGxHdQyGQt-hfJt7eNMXlA_pb_x300.png",
     "id": 4,
-    "price": 2100,
-    "comments": []
+    "price": 6100,
+    "comments": [],
+    "stock": 1
   },
   {
     "winery": "Jarvis",
@@ -61,8 +65,9 @@
     "location": "United States\n·\nNapa Valley",
     "image": "https://images.vivino.com/thumbs/pQ_92smWRKG7Y7h5_ZwD-w_pb_x300.png",
     "id": 5,
-    "price": 2200,
-    "comments": []
+    "price": 2000,
+    "comments": [],
+    "stock": 3
   },
   {
     "winery": "Château d'Yquem",
@@ -74,8 +79,9 @@
     "location": "France\n·\nBordeaux Supérieur",
     "image": "https://images.vivino.com/thumbs/6dP83oDrQy2Zv6es9tHp7w_pb_x300.png",
     "id": 6,
-    "price": 5500,
-    "comments": []
+    "price": 2100,
+    "comments": [],
+    "stock": 17
   },
   {
     "winery": "Domaine Leflaive",
@@ -87,8 +93,9 @@
     "location": "France\n·\nBâtard-Montrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/EDQ4q_3FQ568NVspQBECug_pb_x300.png",
     "id": 7,
-    "price": 400,
-    "comments": []
+    "price": 700,
+    "comments": [],
+    "stock": 9
   },
   {
     "winery": "Joseph Drouhin",
@@ -100,8 +107,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/1QoFUeYqQaCU07v4MBx8yw_pb_x300.png",
     "id": 8,
-    "price": 4200,
-    "comments": []
+    "price": 2300,
+    "comments": [],
+    "stock": 3
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -113,8 +121,9 @@
     "location": "France\n·\nMeursault",
     "image": "https://images.vivino.com/thumbs/l5W5NRvZR_SzClIDSnG5Ag_pb_x300.png",
     "id": 9,
-    "price": 2400,
-    "comments": []
+    "price": 3500,
+    "comments": [],
+    "stock": 1
   },
   {
     "winery": "Olivier Leflaive",
@@ -126,8 +135,9 @@
     "location": "France\n·\nBâtard-Montrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/pWOdFPoyQ427uoHW_l941g_pb_x300.png",
     "id": 10,
-    "price": 1800,
-    "comments": []
+    "price": 8000,
+    "comments": [],
+    "stock": 2
   },
   {
     "winery": "Joseph Drouhin",
@@ -139,8 +149,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/1QoFUeYqQaCU07v4MBx8yw_pb_x300.png",
     "id": 11,
-    "price": 5400,
-    "comments": []
+    "price": 4800,
+    "comments": [],
+    "stock": 10
   },
   {
     "winery": "Domaine de La Romanée-Conti",
@@ -152,8 +163,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/rORmihtxSrKG7SfuI0bD6w_pb_x300.png",
     "id": 12,
-    "price": 1400,
-    "comments": []
+    "price": 4300,
+    "comments": [],
+    "stock": 3
   },
   {
     "winery": "Domaine de La Romanée-Conti",
@@ -165,8 +177,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/rORmihtxSrKG7SfuI0bD6w_pb_x300.png",
     "id": 13,
-    "price": 8000,
-    "comments": []
+    "price": 5400,
+    "comments": [],
+    "stock": 2
   },
   {
     "winery": "M. Chapoutier",
@@ -178,8 +191,9 @@
     "location": "France\n·\nHermitage",
     "image": "https://images.vivino.com/thumbs/K3N0EZYBQeWunDuzNC0Dug_pb_x300.png",
     "id": 14,
-    "price": 3300,
-    "comments": []
+    "price": 4800,
+    "comments": [],
+    "stock": 9
   },
   {
     "winery": "Château Haut-Brion",
@@ -191,8 +205,9 @@
     "location": "France\n·\nPessac-Léognan",
     "image": "https://images.vivino.com/thumbs/EvtJOugzTx-HZXZfdZvTsA_pb_x300.png",
     "id": 15,
-    "price": 5400,
-    "comments": []
+    "price": 6200,
+    "comments": [],
+    "stock": 13
   },
   {
     "winery": "Joseph Drouhin",
@@ -204,8 +219,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/1QoFUeYqQaCU07v4MBx8yw_pb_x300.png",
     "id": 16,
-    "price": 7100,
-    "comments": []
+    "price": 3600,
+    "comments": [],
+    "stock": 3
   },
   {
     "winery": "La Grange des Pères",
@@ -217,8 +233,9 @@
     "location": "France\n·\nHérault",
     "image": "https://images.vivino.com/thumbs/tBJyYsUeTxuYIPy6oS5T4A_pb_x300.png",
     "id": 17,
-    "price": 1200,
-    "comments": []
+    "price": 2800,
+    "comments": [],
+    "stock": 14
   },
   {
     "winery": "Trimbach",
@@ -230,8 +247,9 @@
     "location": "France\n·\nAlsace",
     "image": "https://images.vivino.com/thumbs/sOfai0jLTaKoP_6oXtvH9w_pb_x300.png",
     "id": 18,
-    "price": 2100,
-    "comments": []
+    "price": 4700,
+    "comments": [],
+    "stock": 14
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -243,8 +261,9 @@
     "location": "France\n·\nMeursault",
     "image": "https://images.vivino.com/thumbs/l5W5NRvZR_SzClIDSnG5Ag_pb_x300.png",
     "id": 19,
-    "price": 2600,
-    "comments": []
+    "price": 5900,
+    "comments": [],
+    "stock": 8
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -256,8 +275,9 @@
     "location": "France\n·\nCorton-Charlemagne Grand Cru",
     "image": "https://images.vivino.com/thumbs/QIs0hHhdRHubnyUjY8U2kA_pb_x300.png",
     "id": 20,
-    "price": 4800,
-    "comments": []
+    "price": 4200,
+    "comments": [],
+    "stock": 3
   },
   {
     "winery": "Kongsgaard",
@@ -269,8 +289,9 @@
     "location": "United States\n·\nNapa Valley",
     "image": "https://images.vivino.com/thumbs/xfK7hQR7T6WJjvIIsDW21A_pb_x300.png",
     "id": 21,
-    "price": 9300,
-    "comments": []
+    "price": 1800,
+    "comments": [],
+    "stock": 13
   },
   {
     "winery": "Domaine de La Romanée-Conti",
@@ -282,8 +303,9 @@
     "location": "France\n·\nMontrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/rORmihtxSrKG7SfuI0bD6w_pb_x300.png",
     "id": 22,
-    "price": 8600,
-    "comments": []
+    "price": 5400,
+    "comments": [],
+    "stock": 1
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -295,8 +317,9 @@
     "location": "France\n·\nCorton-Charlemagne Grand Cru",
     "image": "https://images.vivino.com/thumbs/QIs0hHhdRHubnyUjY8U2kA_pb_x300.png",
     "id": 23,
-    "price": 1600,
-    "comments": []
+    "price": 400,
+    "comments": [],
+    "stock": 4
   },
   {
     "winery": "Patrick Javillier",
@@ -308,8 +331,9 @@
     "location": "France\n·\nCorton-Charlemagne Grand Cru",
     "image": "https://images.vivino.com/thumbs/npJNfRLlTtqqmoSCrsn2Kw_pb_x300.png",
     "id": 24,
-    "price": 7700,
-    "comments": []
+    "price": 4500,
+    "comments": [],
+    "stock": 4
   },
   {
     "winery": "Keller",
@@ -321,8 +345,9 @@
     "location": "Germany\n·\nRheinhessen",
     "image": "https://images.vivino.com/thumbs/_tbErBvfQ3CcDGgJf-I6Dw_pb_x300.png",
     "id": 25,
-    "price": 1800,
-    "comments": []
+    "price": 1600,
+    "comments": [],
+    "stock": 2
   },
   {
     "winery": "F.X. Pichler",
@@ -334,8 +359,9 @@
     "location": "Austria\n·\nWachau",
     "image": "https://images.vivino.com/thumbs/Clc1N_neRBq_orOAKw9aqg_pb_x300.png",
     "id": 26,
-    "price": 1400,
-    "comments": []
+    "price": 2200,
+    "comments": [],
+    "stock": 15
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -347,8 +373,9 @@
     "location": "France\n·\nCorton-Charlemagne Grand Cru",
     "image": "https://images.vivino.com/thumbs/QIs0hHhdRHubnyUjY8U2kA_pb_x300.png",
     "id": 27,
-    "price": 4300,
-    "comments": []
+    "price": 9900,
+    "comments": [],
+    "stock": 3
   },
   {
     "winery": "Domaine Coche-Dury",
@@ -360,8 +387,9 @@
     "location": "France\n·\nMeursault",
     "image": "https://images.vivino.com/thumbs/l5W5NRvZR_SzClIDSnG5Ag_pb_x300.png",
     "id": 28,
-    "price": 8900,
-    "comments": []
+    "price": 4600,
+    "comments": [],
+    "stock": 9
   },
   {
     "winery": "M. Chapoutier",
@@ -373,8 +401,9 @@
     "location": "France\n·\nHermitage",
     "image": "https://images.vivino.com/thumbs/e8iQmynXSRq_uYHKMdPMlQ_pb_x300.png",
     "id": 29,
-    "price": 1700,
-    "comments": []
+    "price": 2700,
+    "comments": [],
+    "stock": 17
   },
   {
     "winery": "Château de Puligny Montrachet",
@@ -386,7 +415,8 @@
     "location": "France\n·\nChevalier-Montrachet Grand Cru",
     "image": "https://images.vivino.com/thumbs/mpBp_HteQAKsBo5MJ6JnMA_pb_x300.png",
     "id": 30,
-    "price": 7200,
-    "comments": []
+    "price": 6300,
+    "comments": [],
+    "stock": 19
   }
-]
+]}

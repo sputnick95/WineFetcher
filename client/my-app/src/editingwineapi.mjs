@@ -9,7 +9,8 @@ function editingwineapi(){
         const newData = api.map(object => ({
             ...object,
             price: Math.round(((Math.random()*10001)+100)/100)*100,
-            comments: [] 
+            comments: [],
+            stock: Math.floor(Math.random()*20)+1
         }));
 
         const newdataString = JSON.stringify(newData, null, 2)

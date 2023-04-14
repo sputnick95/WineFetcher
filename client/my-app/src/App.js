@@ -15,12 +15,40 @@ import SignUp from "./components/SignUp";
 function App({userCart, setUserCart}) {
   const [wine_inventory, setWineInventory] = useState([])
   const [user, setUser] = useState({})
+  const [sub_total, setSubtotal] = useState(0)
+
   const navigate = useNavigate();
 
   useEffect(()=>{
     fetch("http://localhost:3000/white_wines")
     .then(resp => resp.json())
-    .then(data => setWineInventory(data))
+    .then(data => {
+      
+      // format data to match wine inventory schema
+      const formattedData = data.map((wine) => ({
+        comments: wine.comments,
+        wine_name: wine.wine,
+        id: wine.id,
+        image: wine.image,
+        location: wine.location,
+        price: wine.price,
+        average_rating: wine.rating.average,
+        number_of_reviews: wine.rating.reviews,
+        stock: wine.stock,
+        winery: wine.winery
+      }));
+      //send POST request to backend to add wine inventory data
+
+      // fetch('/wine_inventory',{
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify(formattedData)
+      // })
+      
+      setWineInventory(formattedData)
+    })
   }, [])
 
 
@@ -54,6 +82,8 @@ function App({userCart, setUserCart}) {
     });
   }, []);
 
+  
+
 
   return (
     <div className="App">
@@ -63,7 +93,7 @@ function App({userCart, setUserCart}) {
         element={<Homepage inventory={wine_inventory} />} exact path="/"/>
         {wine_inventory !== undefined ? <Route element={<InventoryList userCart={userCart} user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
         {wine_inventory !== undefined ? <Route element={<ItemDetails item_1_test={wine_inventory} />} path="/item-details" /> : null}
-        {wine_inventory !== undefined ? <Route element={<ShoppingCart userCart={userCart} setUserCart={setUserCart} />} path='/shopping-cart/:id'  /> : null}
+        {wine_inventory !== undefined ? <Route element={<ShoppingCart sub_total={sub_total} setSubtotal={setSubtotal} userCart={userCart} setUserCart={setUserCart} />} path='/shopping-cart/:id'  /> : null}
         <Route element={<LoginPage handleLoginSubmit={handleLoginSubmit} />} path="/login" />
         <Route element={<SignUp />} path="/signup" />
       </Routes>

@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request, make_response, session as browser_session
 from extensions import *
-from models import db, User, Cart
+from models import db, User, Cart, Wine_inventory
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -11,6 +11,38 @@ app.json.compact = False
 db.init_app(app)
 migrate.init_app(app, db)
 bcrypt.init_app(app)
+
+
+@app.route('/wine_inventory', methods=['POST','GET'])
+def wine_inventory_populate():
+
+    if request.method == 'GET':
+        wines = Wine_inventory.query.order_by(Wine_inventory.id).all()
+
+        each_wine_dicted = [wine.to_dict() for wine in wines]
+        return make_response(jsonify(each_wine_dicted), 200)
+
+    if request.method == 'POST':
+        data = request.get_json()
+
+        for wine_data in data:
+            new_wine = Wine_inventory(
+                wine_name=wine_data['wine_name'],
+                winery=wine_data['winery'],
+                location=wine_data['location'],
+                average_rating=wine_data['average_rating'],
+                number_of_reviews=wine_data['number_of_reviews'],
+                image=wine_data['image'],
+                stock=wine_data['stock'],
+                price=wine_data['price']
+            )
+            db.session.add(new_wine)
+        db.session.commit()
+
+        return make_response(jsonify({'Status':'Post is successful'}), 201)
+    
+
+
 
 
 @app.route('/user', methods=['POST'])
@@ -93,7 +125,9 @@ def new_cart_item():
             wine_name = data['wine_name'],
             winery = data['winery'],
             image = data['image'],
-            user_id = data['user_id']
+            user_id = data['user_id'],
+            price = data['price'],
+            quantity_ordered = data['quantity_ordered']
         )
 
         db.session.add(new_item)
