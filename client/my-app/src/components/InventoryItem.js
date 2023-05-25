@@ -4,17 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup';
-import { Image } from 'react-bootstrap';
-import Toast from 'react-bootstrap/Toast';
 import { useNavigate } from 'react-router-dom';
-import StarRating from './StarRating';
 
 function InventoryItem({wine_name, image, id, winery, user, location, price, stock, number_of_reviews, average_rating, setShowToast, setItemNumber, itemNumber, userCart, selectedItem, setItem}){
     const [quantity_ordered, setQuantity] = useState('')
     const [inv, setInv] = useState([])
     const navigate = useNavigate();
-    const rating = 3;
 
     function handleClickItem(event){
         const clicked_item = {

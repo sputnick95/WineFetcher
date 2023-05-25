@@ -122,6 +122,14 @@
   display: flex;
 }
 
+.star-rating-filled {
+  fill: goldenrod;
+}
+ 
+.star-rating-blank {
+  fill: #d8d8d8;
+}
+
 .item-summary {
   padding: 50px;
   flex-grow: 1;

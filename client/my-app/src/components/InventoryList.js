@@ -65,4 +65,6 @@ function InventoryList({user, inventory, itemNumber, setItemNumber, userCart, se
 }
 export default InventoryList;
 
+
+
  

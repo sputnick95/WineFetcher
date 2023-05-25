@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request, make_response, session as browser_session
 from extensions import *
 from models import db, User, Cart, Wine_inventory, Order
+from random import randint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -54,7 +55,6 @@ def wine_inventory_populate():
 
         return make_response(jsonify(wine_inventory.to_dict()),200)
         ## TEST WITH POSTMAN
-
 
 @app.route('/wine_inventory/<int:id>', methods = ['GET'])
 def wine_by_id(id):

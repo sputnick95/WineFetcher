@@ -86,8 +86,10 @@ class Wine_inventory(db.Model):
             "number_of_reviews": self.number_of_reviews,
             "image": self.image,
             "stock": self.stock,
-            "price": self.price,
+            "price": self.price
         }
+    
+
 
 class Order(db.Model):
     __tablename__ = "orders"

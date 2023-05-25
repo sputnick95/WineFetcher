@@ -27,9 +27,11 @@ function App({userCart, setUserCart}) {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    fetch("http://localhost:3000/white_wines")
+    fetch(`/wine_inventory`)
     .then(resp => resp.json())
     .then(data => {
+      console.log(data)
+      setWineInventory(data)
 
       // format data to match wine inventory schema
       const formattedData = data.map((wine) => ({
@@ -53,8 +55,7 @@ function App({userCart, setUserCart}) {
       //   },
       //   body: JSON.stringify(formattedData)
       // })
-      
-      setWineInventory(formattedData)
+  
     })
   }, [])
 
@@ -111,8 +112,7 @@ function App({userCart, setUserCart}) {
     <div className="App">
       <Header itemNumber={itemNumber} setItemNumber={setItemNumber} userStatus={user} setUser={setUser} userCart={userCart} />
       <Routes>
-        <Route
-        element={<Homepage inventory={wine_inventory} />} exact path="/"/>
+        <Route element={<Homepage inventory={wine_inventory} />} exact path="/"/>
         {wine_inventory !== undefined ? <Route element={<InventoryList setItem={setItem} selectedItem={selectedItem} itemNumber={itemNumber} setItemNumber={setItemNumber} userCart={userCart} user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
         {wine_inventory !== undefined ? <Route element={<ItemDetails selectedItem={selectedItem} item_1_test={wine_inventory[0]} />} path="/item-details" /> : null}
         {wine_inventory !== undefined ? <Route element={<ShoppingCart sub_total={sub_total} setSubtotal={setSubtotal} userCart={userCart} setUserCart={setUserCart} />} path='/shopping-cart/:id'  /> : null}

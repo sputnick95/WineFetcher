@@ -1,10 +1,9 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import StarRating from './StarRating';
 
 
 const Star = ({ starId, rating, onMouseEnter, onMouseLeave, onClick }) => {
@@ -37,13 +36,19 @@ const Star = ({ starId, rating, onMouseEnter, onMouseLeave, onClick }) => {
   };
 
 
-function ItemDetails({item_1_test, selectedItem}){
+function ItemDetails({selectedItem}){
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const stars = [1, 2, 3, 4, 5];
 
+    useEffect(() => {
+        if (selectedItem) {
+          setRating(selectedItem.average_rating);
+        }
+      }, [selectedItem]);
 
-    console.log(item_1_test?.average_rating)
+
+    console.log(selectedItem?.average_rating)
     console.log(selectedItem)
 
     return(
@@ -82,7 +87,6 @@ function ItemDetails({item_1_test, selectedItem}){
                                     <span>{selectedItem?.average_rating}</span>
                                     <span>{selectedItem?.number_of_reviews}</span>
                                 </Row>
-                                <StarRating rating={rating} />  
                                 <a><u>Add Review</u></a>
                             </div>
                         </div>
