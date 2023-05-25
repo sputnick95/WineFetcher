@@ -1,24 +1,29 @@
 from extensions import db
-from sqlalchemy.orm import validates
 
 class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String)
+    fullname = db.Column(db.String)
     username = db.Column(db.String)
     password = db.Column(db.String)
+    shippingaddress = db.Column(db.String)
+    CreditCard = db.Column(db.Integer)
 
     carts = db.relationship('Cart', backref='user')
     orders = db.relationship('Order', backref='user') #new relationship added
-
+    
 
     def to_dict(self):
         return {
             'id': self.id,
             'email': self.email,
+            'fullname': self.fullname,
             'username': self.username,
             'password': self.password,
+            'shippingaddress': self.shippingaddress,
+            'CreditCard': self.CreditCard,
             'carts' : [cart.to_dict() for cart in self.carts]
         }
 
@@ -47,8 +52,11 @@ class Cart(db.Model):
             "location": self.location,
             "average_rating": self.average_rating,
             "number_of_reviews": self.number_of_reviews,
+            "quantity_ordered": self.quantity_ordered,
             "image": self.image,
-            "price": self.price
+            "price": self.price,
+            "user_id": self.user_id,
+            "wine_id": self.wine_id
         }
     
 class Wine_inventory(db.Model):
@@ -109,7 +117,8 @@ class Order(db.Model):
             "number_of_reviews": self.number_of_reviews,
             "image": self.image,
             "quantity_ordered": self.quantity_ordered,
-            "price": self.price
+            "price": self.price,
+            'time_of_order': self.time_of_order
         } 
     
 
@@ -123,3 +132,5 @@ class OrderWine(db.Model): #JOIN TABLE
 
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id')) #new field added to database
     wine_id = db.Column(db.Integer, db.ForeignKey('wines.id')) #new field added to database
+
+

@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 
 function CartIcon({userCart, userStatus, cart_num}) {
+  let num_items =0
+  for(let i=0; i<userCart.length; i++){
+    num_items += userCart[i].quantity_ordered
+  }
 
-  console.log(userCart.length)
 
   return (
     <>
-        <span className="number-of-orders">{userCart.length}</span>
+        <span className="number-of-orders">{userStatus?.username !== undefined ? num_items : '-'}</span>
         
         <svg    
         xmlns="http://www.w3.org/2000/svg"

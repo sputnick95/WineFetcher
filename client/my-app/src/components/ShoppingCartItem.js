@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
-function ShoppingCartItem({image, wine_name, winery, id, setUserCart, price, sub_total, setSubtotal}){
+function ShoppingCartItem({image, wine_name, winery, id, setUserCart, price, sub_total, setSubtotal, quantity_ordered}){
 
     function handleClickDelete(event){
         fetch(`/cart_item/${id}`,{
@@ -23,7 +23,6 @@ function ShoppingCartItem({image, wine_name, winery, id, setUserCart, price, sub
 
 
 
-
     return(
         <>
             <Row className='shopping-cart-row'>
@@ -37,7 +36,7 @@ function ShoppingCartItem({image, wine_name, winery, id, setUserCart, price, sub
                     <div className='item-info'>
                         <span>Eligible FREE Shipping</span>
                         {winery !== undefined ? <p>Winery: {winery}</p> : null}
-                        
+                        <p>Qty: {quantity_ordered}</p>
                         <Button onClick={handleClickDelete} className='remove-from-cart-button' >Remove from Cart</Button>
                     </div>
                 </Col>  

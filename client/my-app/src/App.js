@@ -11,11 +11,18 @@ import ItemDetails from './components/ItemDetails';
 import ShoppingCart from './components/ShoppingCart';
 import LoginPage from './components/Login';
 import SignUp from "./components/SignUp";
+import Checkout from './components/Checkout';
+import Orders from './components/Orders';
+import Footer from './components/Footer';
 
 function App({userCart, setUserCart}) {
   const [wine_inventory, setWineInventory] = useState([])
   const [user, setUser] = useState({})
   const [sub_total, setSubtotal] = useState(0)
+  const [itemNumber, setItemNumber] = useState(0)
+  const [selectedItem, setItem] = useState([])
+
+
 
   const navigate = useNavigate();
 
@@ -23,7 +30,7 @@ function App({userCart, setUserCart}) {
     fetch("http://localhost:3000/white_wines")
     .then(resp => resp.json())
     .then(data => {
-      
+
       // format data to match wine inventory schema
       const formattedData = data.map((wine) => ({
         comments: wine.comments,
@@ -50,7 +57,6 @@ function App({userCart, setUserCart}) {
       setWineInventory(formattedData)
     })
   }, [])
-
 
 
   //login
@@ -82,21 +88,42 @@ function App({userCart, setUserCart}) {
     });
   }, []);
 
+
+  useEffect(() => {
+    fetch(`/cart_user_id/${user.id}`)
+    .then(resp => resp.json())
+    .then(data => {setUserCart(data)})
+    }, [user.id]);
+    
+
+
+
+    // setItemNumber(prev => userCart.map(object => object.quantity_ordered + prev))
+
+  
+
+    
+
   
 
 
   return (
     <div className="App">
-      <Header userStatus={user} setUser={setUser} userCart={userCart} />
+      <Header itemNumber={itemNumber} setItemNumber={setItemNumber} userStatus={user} setUser={setUser} userCart={userCart} />
       <Routes>
         <Route
         element={<Homepage inventory={wine_inventory} />} exact path="/"/>
-        {wine_inventory !== undefined ? <Route element={<InventoryList userCart={userCart} user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
-        {wine_inventory !== undefined ? <Route element={<ItemDetails item_1_test={wine_inventory} />} path="/item-details" /> : null}
+        {wine_inventory !== undefined ? <Route element={<InventoryList setItem={setItem} selectedItem={selectedItem} itemNumber={itemNumber} setItemNumber={setItemNumber} userCart={userCart} user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
+        {wine_inventory !== undefined ? <Route element={<ItemDetails selectedItem={selectedItem} item_1_test={wine_inventory[0]} />} path="/item-details" /> : null}
         {wine_inventory !== undefined ? <Route element={<ShoppingCart sub_total={sub_total} setSubtotal={setSubtotal} userCart={userCart} setUserCart={setUserCart} />} path='/shopping-cart/:id'  /> : null}
         <Route element={<LoginPage handleLoginSubmit={handleLoginSubmit} />} path="/login" />
         <Route element={<SignUp />} path="/signup" />
+        <Route element={<Checkout user={user} userCart={userCart} setUserCart={setUserCart} sub_total={sub_total} setSubtotal={setSubtotal} />} path="/checkout"  />
+        <Route element={<Orders sub_total={sub_total} userCart={userCart} setSubtotal={setSubtotal} user={user} />} path='/your_orders' />
       </Routes>
+
+      <Footer />
+
     </div>
   );
 }

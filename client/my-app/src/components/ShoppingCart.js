@@ -13,25 +13,20 @@ import ShoppingCartItem from './ShoppingCartItem';
 
 function ShoppingCart({userCart, setUserCart, sub_total, setSubtotal}){
 
-    const { id } = useParams()
-
-    useEffect(() => {
-        fetch(`/cart_user_id/${id}`)
-        .then(resp => resp.json())
-        .then(data => {
-            setUserCart(data)
-            console.log(data)
-            data.map(wine => setSubtotal(prev => prev + wine.price))
-        })
-    }, [])
 
 
 
+    let subtotal = 0;
+    for(let i =0; i<userCart.length; i++){
+        subtotal += (userCart[i].price)*(userCart[i].quantity_ordered)
+    }
+    setSubtotal(subtotal)
+    console.log(sub_total)
 
 
     return(
-        <>  
-            <Row>
+        <div className='cart_container'>  
+            <Row >
                 <Col>
                     <h2>Shopping Cart</h2>
                 </Col>
@@ -39,10 +34,8 @@ function ShoppingCart({userCart, setUserCart, sub_total, setSubtotal}){
                     <h6>Price</h6>
                 </Col>
             </Row>
-            
-            
             <div > 
-                <Container className='shopping-cart'>
+                <Container className='shopping-cart-container'>
                     {userCart.map(item => {
                         return (
                             <>
@@ -54,10 +47,11 @@ function ShoppingCart({userCart, setUserCart, sub_total, setSubtotal}){
             </div>
             <Container className='subtotal_container'>
                 <div className='subtotal_text'>
-                    <h6><b>Subtotal: </b> $ {sub_total/2}</h6>
+                    <h6><b>Subtotal: </b> $ {sub_total}</h6>
+                    <Button href='/checkout' >Proceed to Checkout</Button>
                 </div>
             </Container>
-        </>
+        </div>
     )
 }   
 export default ShoppingCart;
