@@ -125,6 +125,14 @@
 .star-rating-filled {
   fill: goldenrod;
 }
+
+.half-star-rating {
+  fill: goldenrod;
+}
+
+.second-half-star {
+  fill: #d8d8d8
+}
  
 .star-rating-blank {
   fill: #d8d8d8;
