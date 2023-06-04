@@ -145,7 +145,13 @@
 
 .image-div{
   padding: 1em;
-  
+
+}
+
+.maps-container{
+  outline: 0.5px solid black;
+  width: 400px;
+  height: 300px;
 }
 
 .Inventory-button-quantity {

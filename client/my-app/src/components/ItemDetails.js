@@ -92,8 +92,9 @@ function ItemDetails({selectedItem}){
                         </div>
                     </Col>
                     <Col>
-                        <div>
-                            <h4>Map</h4>
+                        <h4>Map</h4>
+                        <div className='maps-container'>
+                            
                         </div>
                     </Col>
                 </div>
