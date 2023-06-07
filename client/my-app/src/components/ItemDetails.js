@@ -2,6 +2,12 @@ import React, {useState, useEffect} from 'react';
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import Form from 'react-bootstrap/Form'
+import {Provider, UpdownButton} from '@lyket/react';
+
+import MapComponent from './MapComponent';
 
 
 const Star = ({ starId, rating }) => {
@@ -43,19 +49,29 @@ function ItemDetails({selectedItem}){
 
     const [rating, setRating] = useState(0);
     const stars = [1, 2, 3, 4, 5];
-
+    const [comment_data, setComments] = useState([])
 
     useEffect(() => {
         if (selectedItem) {
           setRating(selectedItem.average_rating);
         }
-      }, [selectedItem]);
+
+        
+        
+        fetch(`/comments_by_wine/${selectedItem.wine_id}`)
+        .then(response => response.json())
+        .then(data => {setComments(data)})}, [selectedItem]);
+
+    console.log(comment_data[1]?.user.username)
 
     
 
+    
+    
     return(
         <>
             <h1>Item Summary</h1>
+            <div>
             <Container>
                 <div className='item-details-div'>
                     <Col>
@@ -93,14 +109,73 @@ function ItemDetails({selectedItem}){
                     </Col>
                     <Col>
                         <h4>Map</h4>
-                        <div className='maps-container'>
-                            
-                        </div>
+                        <MapComponent
+                        address={selectedItem.winery}
+                        />
                     </Col>
                 </div>
             </Container>
+            </div>
+            <div className='comments-container'>
+              <div className='comment-section-headline' >
+                <h2>Community Reviews</h2>
+              </div>
+              <div className='add-a-comment-container'>
+                <div className='add-a-comment-button'>
+                  <Form>
+                    <Form.Group controlId='comment'>
+                      <Form.Label></Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        // value={null}
+                        // onChange={null}
+                      />
+                    </Form.Group>
+                  </Form>
+                  <ButtonToolbar>
+                    <Button variant="primary" type='submit' className='custom-rounded-button'>Add Comment</Button>
+                  </ButtonToolbar>                    
+                </div>
+                <div className='add-a-comment'>
+
+                </div>
+              </div>
+              <div className='comments-section-container'>
+                    {comment_data.map((data) => (
+
+
+                      <div className='comment-bubble' key={data.id}>
+                        <div>{data.comment}</div>
+                        <div>
+                          <h5>{data.user !== null ? data.user.username: "Unregistered  User"}</h5>
+                          <div className='updown-button-container'>
+                            <Provider
+                              apiKey='pt_06995f6822f19f436ad8c3101f32d2'
+                              theme={{
+                                colors: {
+                                  background: "#b8fff3",
+                                  text: "violet",
+                                  primary: "rgba(255, 224, 138, 0.4)"
+                                }
+                              }}
+                              
+                            >
+                              <UpdownButton/>
+                            </Provider>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      
+                    ))}
+              </div>
+              
+            </div>
         </>
     )
 }
+
+
 
 export default ItemDetails;

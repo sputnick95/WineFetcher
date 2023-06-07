@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request, make_response, session as browser_session
 from extensions import *
-from models import db, User, Cart, Wine_inventory, Order
+from models import db, User, Cart, Wine_inventory, Order,Comments
 from random import randint
 
 app = Flask(__name__)
@@ -221,6 +221,12 @@ def order_by_id(id):
     orders = Order.query.filter_by(user_id = id).all()
 
     return make_response(jsonify([order.to_dict() for order in orders]), 200)
+
+@app.route('/comments_by_wine/<int:id>', methods=['GET'])
+def get_comments_by_wine(id):
+    comments = Comments.query.filter_by(wine_id=id).all()
+
+    return make_response(jsonify([comment.to_dict() for comment in comments]), 200)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

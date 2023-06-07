@@ -1,11 +1,12 @@
 from app import app
 from random import choices as rc
-from models import db, User, Cart, Order, Wine_inventory, OrderWine
+from models import db, User, Cart, Order, Wine_inventory, OrderWine, Comments
 
 if __name__ == '__main__':
     with app.app_context():
         print("Clearing db...")
         User.query.delete()
+        Comments.query.delete()
         
         print("Seeding Users...")
         users = [
@@ -47,5 +48,19 @@ if __name__ == '__main__':
         ]
 
         db.session.add_all(order_join_wine)
+
+        one_comment = Comments(id=1, comment="Fantastic. Nice body; perfect acid balance. Like voting into a slice of pineapple cake.",likes=4, dislikes=0, user_id=14, wine_id=2)
+
+        db.session.add(one_comment)
+
+        many_comments = [
+            Comments(id=2, comment="The most expensive bottle I ever tasted. Honey, walnuts, vanilla. The aroma is endless and very deep. Premium quality",likes=1, dislikes=1, user_id=1, wine_id=2),
+            Comments(id=3, comment="I promised mr. Bok Montrachet by Drouphin, but it is too young! So, this vintage I already posted, but still excited with this! Apples, vanilla, smooth chalky and butter, very complexity and full-bodied Amazing wine! Very recommend! Cheers, dear Bok! I will search for right vintage!",likes=0, dislikes=0, user_id=4, wine_id=2)
+        ]
+
+        db.session.add_all(many_comments)
+
+
+
 
         db.session.commit()

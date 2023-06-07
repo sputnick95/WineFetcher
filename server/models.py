@@ -13,6 +13,9 @@ class User(db.Model):
 
     carts = db.relationship('Cart', backref='user')
     orders = db.relationship('Order', backref='user') #new relationship added
+
+    comments = db.relationship('Comments', backref='user')
+
     
 
     def to_dict(self):
@@ -75,6 +78,7 @@ class Wine_inventory(db.Model):
 
     cart = db.relationship('Cart', backref='wine')
     order_wine = db.relationship('OrderWine', backref='wine') #new field added to database
+    comments = db.relationship('Comments', backref='wine')
 
     def to_dict(self):
         return {
@@ -134,5 +138,31 @@ class OrderWine(db.Model): #JOIN TABLE
 
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id')) #new field added to database
     wine_id = db.Column(db.Integer, db.ForeignKey('wines.id')) #new field added to database
+
+
+
+class Comments(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String)
+    likes = db.Column(db.Integer)
+    dislikes = db.Column(db.Integer)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    wine_id = db.Column(db.Integer, db.ForeignKey('wines.id'))
+
+    # user = db.relationship('User', backref='comments')
+
+    def to_dict(self):
+        return {
+            "id":self.id,
+            "comment":self.comment,
+            "likes":self.likes,
+            "dislikes":self.dislikes,
+            "user_id":self.user_id,
+            "wine_id":self.wine_id,
+            "user":self.user.to_dict() if self.user else None
+        }
 
 
