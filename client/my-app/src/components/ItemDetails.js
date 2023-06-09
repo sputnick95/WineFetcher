@@ -62,7 +62,8 @@ function ItemDetails({selectedItem}){
         .then(response => response.json())
         .then(data => {setComments(data)})}, [selectedItem]);
 
-    console.log(comment_data[1]?.user.username)
+    console.log(comment_data[1])
+    console.log(selectedItem)
 
     
 

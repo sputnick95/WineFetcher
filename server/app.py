@@ -222,11 +222,32 @@ def order_by_id(id):
 
     return make_response(jsonify([order.to_dict() for order in orders]), 200)
 
-@app.route('/comments_by_wine/<int:id>', methods=['GET'])
+@app.route('/comments_by_wine/<int:id>', methods=['GET','POST'])
 def get_comments_by_wine(id):
-    comments = Comments.query.filter_by(wine_id=id).all()
 
-    return make_response(jsonify([comment.to_dict() for comment in comments]), 200)
+    if request.methods=='GET':
+        comments = Comments.query.filter_by(wine_id=id).all()
+        return make_response(jsonify([comment.to_dict() for comment in comments]), 200)
+    
+    elif request.method == 'POST':
+        data = request.get_json()
+
+        new_comment = Comments(
+            comment = data['comment'],
+            likes = 0,
+            dislikes = 0,
+            user_id = data['user_id'],
+            wine_id = data['wine_id']
+        )
+
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return make_response(jsonify(new_comment.to_dict()), 201)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
