@@ -8,9 +8,6 @@ import InventoryItem from './InventoryItem'
 function InventoryList({user, inventory, itemNumber, setItemNumber, userCart, selectedItem, setItem} ){
     const [activePage, setActivePage] = useState(1);
     const [showToast, setShowToast] = useState(false)
-
-
-
     const ww = inventory
     const pageSize = 12;
     let totalPages;

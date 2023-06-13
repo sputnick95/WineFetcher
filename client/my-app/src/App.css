@@ -160,6 +160,23 @@
   margin: 0 auto;
 }
 
+.comments-container{
+  padding: 5px;
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+.comments-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-control{
+  max-width: 75%;
+  resize: vertical;
+  margin: 0 auto;
+}
+
 .add-a-comment-container{
   padding: 0;
 }

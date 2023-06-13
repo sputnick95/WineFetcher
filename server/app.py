@@ -225,7 +225,7 @@ def order_by_id(id):
 @app.route('/comments_by_wine/<int:id>', methods=['GET','POST'])
 def get_comments_by_wine(id):
 
-    if request.methods=='GET':
+    if request.method=='GET':
         comments = Comments.query.filter_by(wine_id=id).all()
         return make_response(jsonify([comment.to_dict() for comment in comments]), 200)
     
@@ -244,6 +244,24 @@ def get_comments_by_wine(id):
         db.session.commit()
 
         return make_response(jsonify(new_comment.to_dict()), 201)
+    
+@app.route('/del_patch_post_get_comment/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
+def del_patch_post_get_comment(id):
+    if request.method == 'GET':
+        comment = Comments.query.filter_by(id=id).first()
+        return make_response(comment.to_dict(), 200)
+    
+    elif request.method == 'DELETE':
+        comment = Comments.query.filter_by(id=id).first()
+
+        db.session.delete(comment)
+        db.session.commit()
+
+        return make_response(jsonify({'Deleted': True}), 202)
+
+
+
+            
 
 
 

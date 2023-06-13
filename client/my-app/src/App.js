@@ -114,7 +114,7 @@ function App({userCart, setUserCart}) {
       <Routes>
         <Route element={<Homepage inventory={wine_inventory} />} exact path="/"/>
         {wine_inventory !== undefined ? <Route element={<InventoryList setItem={setItem} selectedItem={selectedItem} itemNumber={itemNumber} setItemNumber={setItemNumber} userCart={userCart} user={user} inventory={wine_inventory}/>} path="/inventory"/> : null}
-        {wine_inventory !== undefined ? <Route element={<ItemDetails selectedItem={selectedItem} item_1_test={wine_inventory[0]} />} path="/item-details" /> : null}
+        {wine_inventory !== undefined ? <Route element={<ItemDetails selectedItem={selectedItem} user={user} />} path="/item-details" /> : null}
         {wine_inventory !== undefined ? <Route element={<ShoppingCart sub_total={sub_total} setSubtotal={setSubtotal} userCart={userCart} setUserCart={setUserCart} />} path='/shopping-cart/:id'  /> : null}
         <Route element={<LoginPage handleLoginSubmit={handleLoginSubmit} />} path="/login" />
         <Route element={<SignUp />} path="/signup" />

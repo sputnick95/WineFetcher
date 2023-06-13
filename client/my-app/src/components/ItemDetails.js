@@ -5,9 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Form from 'react-bootstrap/Form'
-import {Provider, UpdownButton} from '@lyket/react';
 
 import MapComponent from './MapComponent';
+import Comment from './Comment';
 
 
 const Star = ({ starId, rating }) => {
@@ -44,29 +44,51 @@ const Star = ({ starId, rating }) => {
 
 
 
-function ItemDetails({selectedItem}){
+function ItemDetails({selectedItem, user}){
 
 
     const [rating, setRating] = useState(0);
     const stars = [1, 2, 3, 4, 5];
     const [comment_data, setComments] = useState([])
+    const [new_comment, setNewCom] = useState(null)
 
     useEffect(() => {
         if (selectedItem) {
           setRating(selectedItem.average_rating);
         }
 
-        
-        
         fetch(`/comments_by_wine/${selectedItem.wine_id}`)
         .then(response => response.json())
         .then(data => {setComments(data)})}, [selectedItem]);
 
-    console.log(comment_data[1])
-    console.log(selectedItem)
+    console.log(comment_data)
+
+    function handleChange(event){
+      
+      setNewCom(prev => event.target.value)
+    }
+
+    function handleClick(event){
+      event.preventDefault()
+
+      const new_comment_obj = {
+        comment: new_comment,
+        likes: 0,
+        dislikes: 0,
+        user_id: user.id,
+        wine_id: selectedItem.wine_id
+      }
+
+      fetch(`/comments_by_wine/${selectedItem.wine_id}`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(new_comment_obj)
+      })
+        .then(resp => resp.json())
+        .then(data => setComments(prev => [...prev, data]))
+    }
 
     
-
     
     
     return(
@@ -121,55 +143,44 @@ function ItemDetails({selectedItem}){
               <div className='comment-section-headline' >
                 <h2>Community Reviews</h2>
               </div>
+              <div className='comments-section-container'>
+                    {comment_data.map((data) => (
+                      <Comment
+                        id={data.id}
+                        data={data}
+                        user={user}
+                        comment_data={comment_data}
+                        setComments={setComments}
+                      />
+                    ))}
+              </div>
               <div className='add-a-comment-container'>
-                <div className='add-a-comment-button'>
-                  <Form>
+                <div className='add-a-comment-form-section'>
+                  <Form className='comments-form'>
                     <Form.Group controlId='comment'>
                       <Form.Label></Form.Label>
                       <Form.Control
                         as="textarea"
-                        rows={3}
-                        // value={null}
-                        // onChange={null}
+                        rows={2} // Adjust the number of rows as needed
+                        placeholder='Add a Comment'
+                        onChange={handleChange}
+                        value={new_comment}
                       />
                     </Form.Group>
                   </Form>
                   <ButtonToolbar>
-                    <Button variant="primary" type='submit' className='custom-rounded-button'>Add Comment</Button>
+                    <Button 
+                      variant="primary" 
+                      type='submit' 
+                      className='custom-rounded-button'
+                      onClick={handleClick}
+                      >
+
+                        Add Comment
+
+                    </Button>
                   </ButtonToolbar>                    
                 </div>
-                <div className='add-a-comment'>
-
-                </div>
-              </div>
-              <div className='comments-section-container'>
-                    {comment_data.map((data) => (
-
-
-                      <div className='comment-bubble' key={data.id}>
-                        <div>{data.comment}</div>
-                        <div>
-                          <h5>{data.user !== null ? data.user.username: "Unregistered  User"}</h5>
-                          <div className='updown-button-container'>
-                            <Provider
-                              apiKey='pt_06995f6822f19f436ad8c3101f32d2'
-                              theme={{
-                                colors: {
-                                  background: "#b8fff3",
-                                  text: "violet",
-                                  primary: "rgba(255, 224, 138, 0.4)"
-                                }
-                              }}
-                              
-                            >
-                              <UpdownButton/>
-                            </Provider>
-                          </div>
-                          
-                        </div>
-                      </div>
-                      
-                    ))}
               </div>
               
             </div>
@@ -180,3 +191,4 @@ function ItemDetails({selectedItem}){
 
 
 export default ItemDetails;
+

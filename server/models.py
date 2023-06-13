@@ -27,7 +27,8 @@ class User(db.Model):
             'password': self.password,
             'shippingaddress': self.shippingaddress,
             'CreditCard': self.CreditCard,
-            'carts' : [cart.to_dict() for cart in self.carts]
+            'carts' : [cart.to_dict() for cart in self.carts],
+            'Comments':[comment.comment for comment in self.comments]
         }
 
 class Cart(db.Model):
