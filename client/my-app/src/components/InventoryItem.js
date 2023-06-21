@@ -3,13 +3,45 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
+
+const Modal_for_order = (props) => {
+
+
+    return (
+        <>
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header>
+                    <Modal.Title>
+                        Modal Heading
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}  >Close</Button>
+                </Modal.Footer>
+
+            </Modal>
+        </>
+    )
+}
 
 function InventoryItem({wine_name, image, id, winery, user, location, price, stock, number_of_reviews, average_rating, setShowToast, setItemNumber, itemNumber, userCart, selectedItem, setItem}){
     const [quantity_ordered, setQuantity] = useState('')
     const [inv, setInv] = useState([])
+    const [showmodal, setShowModal] = useState(false)
+
     const navigate = useNavigate();
+
 
     function handleClickItem(event){
         const clicked_item = {
@@ -27,6 +59,7 @@ function InventoryItem({wine_name, image, id, winery, user, location, price, sto
         setItem(clicked_item)
         navigate('/item-details')
     }
+
 
     function handleChange(event){
         setQuantity(event.target.value)
@@ -47,39 +80,47 @@ function InventoryItem({wine_name, image, id, winery, user, location, price, sto
             average_rating: average_rating,
             wine_id: id
         }
+
+        setShowModal(prev => !prev)
+
+        console.log(new_item_to_cart)
+
+        
+
         // GET request to check if new_item_to_cart already in Cart, if not, then POST, if else, then PATCH quantity ordered (implement on the frontend and the backend).
-        fetch(`/cart_user_id/${user.id}`)
-        .then(resp => resp.json())
-        .then(data => {
-            for(let i=0; i < data.length; i++){
-                if(data[i].wine_id === (new_item_to_cart.wine_id)){
-                    fetch(`/cart_user_id/${user.id}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            wine_id: id,
-                            quantity_ordered: parseInt(quantity_ordered)
-                        })
-                    })
-                    .then(resp => resp.json())
-                    return;
-                }
-            }
+       
+        // fetch(`/cart_user_id/${user.id}`)
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     for(let i=0; i < data.length; i++){
+        //         if(data[i].wine_id === (new_item_to_cart.wine_id)){
+        //             fetch(`/cart_user_id/${user.id}`, {
+        //                 method: 'PATCH',
+        //                 headers: {
+        //                     'Content-Type': 'application/json'
+        //                 },
+        //                 body: JSON.stringify({
+        //                     wine_id: id,
+        //                     quantity_ordered: parseInt(quantity_ordered)
+        //                 })
+        //             })
+        //             .then(resp => resp.json())
+        //             return;
+        //         }
+        //     }
 
-            fetch(`/new_cart_item`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(new_item_to_cart)
-            })
-                .then(resp => resp.json())
-        })
+        //     fetch(`/new_cart_item`, {
+        //         method: 'POST',
+        //         headers: {'Content-Type': 'application/json'},
+        //         body: JSON.stringify(new_item_to_cart)
+        //     })
+        //         .then(resp => resp.json())
+        // })
 
-        setShowToast(true);
-        setTimeout(() => setShowToast(false), 3000);
+        // setShowToast(true);
+        // setTimeout(() => setShowToast(false), 3000);
 
-        userCart.map(object => setItemNumber(prev => prev + object.quantity_ordered))
+        // userCart.map(object => setItemNumber(prev => prev + object.quantity_ordered))
     };
 
     useEffect(() => {
@@ -128,6 +169,10 @@ function InventoryItem({wine_name, image, id, winery, user, location, price, sto
                 </Card.Body>
             </Card>
         ))}
+        <Modal_for_order
+            show={showmodal}
+            onHide={() => setShowModal(false)}
+        />
         </>
     )
 }
