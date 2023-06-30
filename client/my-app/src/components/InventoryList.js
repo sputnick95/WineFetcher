@@ -48,7 +48,19 @@ function InventoryList({user, inventory, itemNumber, setItemNumber, userCart, se
             </div>
             
             <div className="cards">
-                {productsOnPage !== undefined ? productsOnPage.map((item) => <InventoryItem selectedItem={selectedItem} setItem={setItem} userCart={userCart} itemNumber={itemNumber} setItemNumber={setItemNumber} showToast={showToast} setShowToast={setShowToast} {...item} key={item.id} user={user}/> )  : null }
+                {productsOnPage !== undefined ? productsOnPage.map((item) => 
+                    <InventoryItem 
+                        selectedItem={selectedItem} 
+                        setItem={setItem} 
+                        userCart={userCart} 
+                        itemNumber={itemNumber} 
+                        setItemNumber={setItemNumber} 
+                        showToast={showToast} 
+                        setShowToast={setShowToast} 
+                        {...item} 
+                        key={item.id} 
+                        user={user}
+                    /> ) : null}
             </div>
             <Pagination className="justify-content-center" >
                 {Array.from({ length: totalPages}, (_, i) => (

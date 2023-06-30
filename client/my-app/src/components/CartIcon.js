@@ -7,6 +7,7 @@ function CartIcon({userCart, userStatus, cart_num}) {
   }
 
 
+  
   return (
     <>
         <span className="number-of-orders">{userStatus?.username !== undefined ? num_items : '-'}</span>
