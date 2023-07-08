@@ -5,7 +5,7 @@ import GoogleMapReact from 'google-map-react';
 import markerIcon from '../assets/marker.png';
 
 
-const MapComponent = ({address}) => {
+const MapComponent = ({winery}) => {
 
     const [latCode, setLat] = useState(null)
     const [lngCode, setLng] = useState(null)  
@@ -13,7 +13,7 @@ const MapComponent = ({address}) => {
     const [marker, setMarker] =useState({})
 
     useEffect(()=>{
-        const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=AIzaSyDVbkjcbnUkk4YkooYqYDGTPj_5QBiUhQ8`;
+        const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(winery)}&key=AIzaSyDVbkjcbnUkk4YkooYqYDGTPj_5QBiUhQ8`;
 
         fetch(geocodeUrl)
             .then((response) => response.json())
@@ -28,7 +28,6 @@ const MapComponent = ({address}) => {
                         longitude: lng
                     })
 
-                    // console.log(`Latitude: ${lat}, Longitude: ${lng}`);
                 } else {
                     console.error("Geocoding API request failed. Status", data.status);
                 }

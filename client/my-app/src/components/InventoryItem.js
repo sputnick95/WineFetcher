@@ -6,6 +6,10 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
+import infoIcon from './info_icon.png';
+import { RiCloseLine } from 'react-icons/ri';
+
+
 
 const Modal_for_order = (props) => {
     const [quantity_ordered, setQuantity] = useState('')
@@ -78,6 +82,10 @@ const Modal_for_order = (props) => {
         setQuantity(value)
     }
 
+    const handleClick_closeModal = (event) => {
+        props.setShowModal(false)
+    }
+
    
 
     return (
@@ -89,6 +97,7 @@ const Modal_for_order = (props) => {
                 centered
                 className='custom-modal'
             >
+                    <RiCloseLine className='modal-close-button' onClick={handleClick_closeModal} />
 
                 <Modal.Body>
                     <div className='modal_container' >
@@ -98,6 +107,7 @@ const Modal_for_order = (props) => {
                         <div className='wine_details_div_right' >
                             <div>
                                 <h3>{props.modalDetails.wine_name}</h3>
+                                
                             </div>
                             <div>
                                 <p style={{ marginBottom: '0' }}>Price: ${props.modalDetails.price}</p>
@@ -204,7 +214,8 @@ function InventoryItem({wine_name, image, id, winery, user, location, price, sto
                 key = {variant}
                 text='Dark'
                 style={{ width: '18rem' }}
-                className="card-mb-2"
+                className="mb-2"
+                id='card'
             >   
 
                 <Card.Img onClick={handleClickItem} variant="top" src={image} style={{ maxWidth: '35%'}} className="mx-auto d-block"  />
@@ -214,13 +225,19 @@ function InventoryItem({wine_name, image, id, winery, user, location, price, sto
                         </Row>
                         <Row className='Inventory-button-quantity' >
                             <Col>
-                                {inv.stock > 0 ? <Button className='add-to-cart-button' onClick={handleClick_modal} rounded>Click to Add</Button> : null}
+                                {inv.stock > 0 ? 
+                                <>
+                                    <Button className='add-to-cart-button' onClick={handleClick_modal} rounded>Click to Add</Button> 
+                                    <h4>$ {price}</h4>
+                                </>
+                                : null}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
                                 {inv.stock > 0 ? null: 
                                 <div className='out-of-stock-container' >
+                                    <img className='info-icon' src={infoIcon} />
                                     <p>This product is temporarily out of stock because of high demand, we will replenish as soon as possible.</p>
                                 </div>
                                 }

@@ -133,7 +133,7 @@ function ItemDetails({selectedItem, user}){
                     <Col>
                         <h4>Map</h4>
                         <MapComponent
-                        address={selectedItem.winery}
+                        winery={selectedItem.winery}
                         />
                     </Col>
                 </div>
