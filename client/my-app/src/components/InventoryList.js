@@ -14,6 +14,7 @@ function InventoryList({user, inventory, itemNumber, setItemNumber, userCart, se
     let productsOnPage;
     let startIndex;
 
+    console.log("Scroll position:", window.scrollY);
 
     if (ww !== undefined) {
         totalPages = Math.ceil(Object.keys(ww).length / pageSize);

@@ -6,11 +6,9 @@ import {Provider, UpdownButton} from '@lyket/react';
 
 function Comment ({data, id, user, setComments}){
 
-    console.log(user)
 
     function handleDelete(event){
 
-        console.log(data.id)
         fetch(`/del_patch_post_get_comment/${data.id}`, {
           method: 'DELETE',
           headers: {'Content-Type':'application/json'}

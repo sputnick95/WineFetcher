@@ -100,7 +100,8 @@
   list-style: none;
   padding: 5rem;
   margin-top: 0.5rem;
-  margin-left: 5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 #card {
@@ -122,6 +123,7 @@
 .custom-modal-dialog {
   width: 400px;
   max-width: 90%;
+
 }
 
 .custom-modal-content {
@@ -162,12 +164,26 @@
   object-fit: contain;
 }
 
-.item-details-div {
+.image-div{
+  padding: 1em;
+}
+
+.item-detail-box{
+  display: flex;
+  background-color: #EAEDED;
   padding: 5em;
   outline: 2px solid black;
   border-radius: 25px;
+}
+
+.item-details-div {
   display: flex;
-  background-color: #EAEDED;
+  gap: 7em;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
 }
 
 .star-container {
@@ -193,11 +209,48 @@
 .item-summary {
   padding: 50px;
   flex-grow: 1;
-} 
+}
 
-.image-div{
-  padding: 1em;
+.map-box-container{
+  display: grid;
+}
 
+.map-div-box{
+  align-self:first baseline
+}
+
+.scrollbar-div-card{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  margin-right: 5px;
+  border-radius: 50%;
+  border: 0.5px solid gray;
+  width: 150px;
+  height: 150px;
+}
+
+.scrollbar-div-card > img{
+  width: 30px;
+  height: auto;
+}
+
+.scrollbar-div-card > span {
+  text-align: center;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.scrollbar-div-container{
+  display: flex;
+}
+
+.wine-winery-card-scrollbar{
+  white-space: nowrap;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: auto;
+  width: 400px;
 }
 
 .maps-container{
@@ -235,7 +288,9 @@
 
 button.custom-rounded-button{
   border-radius: 50px;
-  margin: 0 auto
+  margin: 0 auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .comment-section-headline{

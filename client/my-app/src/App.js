@@ -126,6 +126,7 @@ function App({userCart, setUserCart}) {
         {wine_inventory !== undefined ? <Route element={<ItemDetails 
         selectedItem={selectedItem} 
         user={user} 
+        wine_inventory={wine_inventory}
         />} path="/item-details" /> : null}
         
         {wine_inventory !== undefined ? <Route element={<ShoppingCart 

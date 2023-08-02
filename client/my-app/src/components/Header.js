@@ -30,7 +30,6 @@ function Header({userStatus, setUser, userCart, setItemNumber, itemNumber}){
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Nav className="me-auto">
                             <Nav.Link href="/inventory">Inventory</Nav.Link>
-                            <Nav.Link href="/item-details">Item Details</Nav.Link> 
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             {userStatus.username !== undefined ? <NavDropdown.Item href='/login' onClick={handleLogoutSubmit} >Logout</NavDropdown.Item> : <NavDropdown.Item href="/login">Login</NavDropdown.Item>}
                             <NavDropdown.Item href="/your_orders"> Your Orders</NavDropdown.Item>

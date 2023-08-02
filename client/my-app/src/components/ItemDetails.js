@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form'
 
 import MapComponent from './MapComponent';
 import Comment from './Comment';
+import Wine_Winery_Card from './Winery_sug_card';
 
 
 const Star = ({ starId, rating }) => {
@@ -44,8 +45,7 @@ const Star = ({ starId, rating }) => {
 
 
 
-function ItemDetails({selectedItem, user}){
-
+function ItemDetails({selectedItem, user, wine_inventory}){
 
     const [rating, setRating] = useState(0);
     const stars = [1, 2, 3, 4, 5];
@@ -61,7 +61,6 @@ function ItemDetails({selectedItem, user}){
         .then(response => response.json())
         .then(data => {setComments(data)})}, [selectedItem]);
 
-    console.log(comment_data)
 
     function handleChange(event){
       
@@ -89,55 +88,60 @@ function ItemDetails({selectedItem, user}){
     }
 
     
-    
+    const filtered_winery_card = wine_inventory.filter(wine => wine.winery === selectedItem.winery)
+    console.log(filtered_winery_card)
     
     return(
         <>
             <h1>Item Summary</h1>
             <div>
-            <Container>
-                <div className='item-details-div'>
-                    <Col>
-                        <div className='image-div'>
-                            <img className='wine-img' src={selectedItem?.image} alt=''/>
+                <div  className='item-details-container'>
+                  <div className='item-details-div'>
+                    <div className='item-detail-box'>
+                          <div className='image-div'>
+                              <img className='wine-img' src={selectedItem?.image} alt=''/>
+                          </div>
+                          <div className='item-summary'>
+                              <div className='item-title'>
+                                  <h4>{selectedItem?.wine_name}</h4>
+                              </div>
+                              <div className='item-descr'>
+                                      <div>
+                                        <span>Average Rating: </span>
+                                        <div class="star-container">
+                                              {stars.map((star,i) => (
+                                                  // work through the code here!!!!!!
+                                              <Star
+                                                  key={i}
+                                                  starId={i}
+                                                  rating={rating}
+                                              />
+                                              ))}
+                                          </div>
+                                      </div>
+                                      
+                                      <span>{selectedItem?.average_rating}</span>
+                                      <span>{selectedItem?.number_of_reviews}</span>
+                                  {/* <a><u>Add Review</u></a> */}
+                              </div>
+                          </div>
+                      </div>
+                      <div className='map-box-container' >
+                        <div className='map-div-box'>
+                            <h4>Winery Location</h4>
+                            <MapComponent
+                              winery={selectedItem.winery}
+                            />
                         </div>
-                    </Col>
-                    <Col>
-                        <div className='item-summary'>
-                            <div className='item-title'>
-                                <h4>{selectedItem?.wine_name}</h4>
-                            </div>
-                            <div className='item-descr'>
-                                <Row>
-                                    <div>
-                                       <span>Average Rating: </span>
-                                       <div class="star-container">
-                                            {stars.map((star,i) => (
-                                                // work through the code here!!!!!!
-                                            <Star
-                                                key={i}
-                                                starId={i}
-                                                rating={rating}
-                                            />
-                                            ))}
-                                        </div>
-                                    </div>
-                                    
-                                    <span>{selectedItem?.average_rating}</span>
-                                    <span>{selectedItem?.number_of_reviews}</span>
-                                </Row>
-                                {/* <a><u>Add Review</u></a> */}
-                            </div>
+                        <div className='wine-winery-card-scrollbar'>
+                          <div className='scrollbar-div-container'>
+                            {filtered_winery_card.map(wine_card => (
+                              <Wine_Winery_Card key={wine_card.id} wine_card={wine_card}/>))}
+                          </div>
                         </div>
-                    </Col>
-                    <Col>
-                        <h4>Map</h4>
-                        <MapComponent
-                        winery={selectedItem.winery}
-                        />
-                    </Col>
+                      </div>
+                  </div>
                 </div>
-            </Container>
             </div>
             <div className='comments-container'>
               <div className='comment-section-headline' >
